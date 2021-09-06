@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 
 using ThreadSum.ViewModels;
 
@@ -21,12 +23,13 @@ public partial class MainWindow : Window {
 		CellViewModel cellViewModel = (CellViewModel) this.ValuesGrid.DataContext;
 		if (!summationViewModel.IsDone) {
 			int total = 0;
-			for (int i = 0; i < 10; i++) {
+			_ = Parallel.For(0, 10, i => {
 				for (int j = 0; j < 10; j++) {
 					summationViewModel[i] += cellViewModel[i, j];
+					Thread.Sleep(250);
 				}
 				total += summationViewModel[i];
-			}
+			});
 			summationViewModel[10] = total;
 			summationViewModel.IsDone = true;
 		}
