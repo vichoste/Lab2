@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 using ThreadSum.Models;
 
@@ -6,7 +7,7 @@ namespace ThreadSum.ViewModels;
 /// <summary>
 /// This is for displaying the row totals and the total
 /// </summary>
-public class SummationViewModel {
+public class SummationViewModel : INotifyPropertyChanged {
 	#region Attributes
 	private List<CellModel> _RowTotals;
 	#endregion
@@ -18,6 +19,12 @@ public class SummationViewModel {
 		get => new(this._RowTotals);
 		private set {
 		}
+	}
+	/// <summary>
+	/// It would be stupid if we have to sum everything again
+	/// </summary>
+	public bool IsDone {
+		get; private set;
 	}
 	#endregion
 	#region Constructors
@@ -47,7 +54,15 @@ public class SummationViewModel {
 	/// <returns>Value at the index</returns>
 	public int this[int row] {
 		get => this._RowTotals[row].Value;
-		set => this._RowTotals[row].Value = value;
+		set {
+			this._RowTotals[row].Value = value;
+			this.IsDone = true;
+			this.OnPropertyChanged("RowTotals");
+		}
 	}
+	#endregion
+	#region Events
+	public event PropertyChangedEventHandler? PropertyChanged;
+	public void OnPropertyChanged(string value) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(value));
 	#endregion
 }

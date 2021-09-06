@@ -26,7 +26,7 @@ public class CellViewModel : INotifyPropertyChanged {
 		get; private set;
 	}
 	/// <summary>
-	/// Gets the rows
+	/// Gets the rows with their respective values
 	/// </summary>
 	public List<CellModel> Values {
 		get {
