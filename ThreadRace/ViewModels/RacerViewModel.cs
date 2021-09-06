@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 using ThreadRace.Models;
@@ -12,6 +13,34 @@ public class RacerViewModel : INotifyPropertyChanged {
 	private RacerModel?[,] _RaceTrack;
 	#endregion
 	#region Properties
+	/// <summary>
+	/// Gets the first race track
+	/// </summary>
+	public List<RacerModel> FirstRaceTrack {
+		get {
+			List<RacerModel> racers = new();
+			for (int column = 0; column < this.ColumnCount; column++) {
+				if (this._RaceTrack[0, column] is RacerModel racerModel) {
+					racers.Add(racerModel);
+				}
+			}
+			return racers;
+		}
+	}
+	/// <summary>
+	/// Gets the second race track
+	/// </summary>
+	public List<RacerModel> SecondRaceTrack {
+		get {
+			List<RacerModel> racers = new();
+			for (int column = 0; column < this.ColumnCount; column++) {
+				if (this._RaceTrack[1, column] is RacerModel racerModel) {
+					racers.Add(racerModel);
+				}
+			}
+			return racers;
+		}
+	}
 	/// <summary>
 	/// Gets the row size of the race track
 	/// </summary>
@@ -61,6 +90,8 @@ public class RacerViewModel : INotifyPropertyChanged {
 				currentRacer.HasBaton = currentRacer.Position is not 30 and not 60 and not 90;
 			}
 		}
+		this.OnPropertyChanged("FirstRaceTrack");
+		this.OnPropertyChanged("SecondRaceTrack");
 	}
 	#endregion
 	#region Events
