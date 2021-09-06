@@ -10,9 +10,4 @@
     <StartupObject>ThreadSum.App</StartupObject>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
-
 </Project>

@@ -2,9 +2,9 @@
 using System.Runtime.CompilerServices;
 
 namespace ThreadSum.Models;
-internal class Matrix : INotifyPropertyChanged {
+internal class MatrixModel : INotifyPropertyChanged {
 	private readonly int[,] _Array;
-	public Matrix(int size) => this._Array = new int[size, size];
+	public MatrixModel(int size) => this._Array = new int[size, size];
 	[IndexerName("Position")]
 	public int this[int row, int column] {
 		get => this._Array[row, column];
