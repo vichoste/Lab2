@@ -25,13 +25,26 @@
 			<TextBox Grid.Row="1" Grid.Column="1"/>
 		</Grid>
 		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0">Generar</Button>
-		<ItemsControl ItemsSource="{Binding}">
+		<ItemsControl ItemsSource="{Binding Values}">
 			<ItemsControl.Resources>
-				<Style x:Key="CellStyle" TargetType="TextBlock">
-					<Setter Property="FontSize" Value="16"/>
-					<Setter Property="FontWeight" Value="ExtraBlack"/>
-					<Setter Property="Background" Value="CornflowerBlue"/>
-					<Setter Property="Text" Value="Hah"/>
+				<Style x:Key="GameGridCellStyle" TargetType="TextBlock">
+					<Setter Property="MinWidth" Value="10"/>
+					<Setter Property="MinHeight" Value="10"/>
+					<Setter Property="TextAlignment" Value="Center"/>
+					<Setter Property="FontSize" Value="10"/>
+					<Setter Property="Margin" Value="4"/>
+					<Setter Property="Padding" Value="8"/>
+					<Setter Property="FontWeight" Value="Bold"/>
+					<Setter Property="Cursor" Value="Hand"/>
+					<Setter Property="Text" Value="{Binding Value}"/>
+					<Setter Property="Background" Value="White"/>
+					<Style.Triggers>
+						<Trigger Property="Text" Value="0">
+							<Setter Property="Background" Value="#082032"/>
+							<Setter Property="Foreground" Value="Transparent"/>
+							<Setter Property="IsHitTestVisible" Value="False"/>
+						</Trigger>
+					</Style.Triggers>
 				</Style>
 			</ItemsControl.Resources>
 			<ItemsControl.ItemsPanel>
@@ -41,7 +54,7 @@
 			</ItemsControl.ItemsPanel>
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<TextBlock Style="{StaticResource CellStyle}"></TextBlock>
+					<TextBlock Style="{StaticResource GameGridCellStyle}"/>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>

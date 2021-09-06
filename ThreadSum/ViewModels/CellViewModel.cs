@@ -30,11 +30,15 @@ public class CellViewModel : INotifyPropertyChanged {
 	/// <summary>
 	/// Gets the rows
 	/// </summary>
-	public IEnumerable<List<CellModel>> Rows {
+	public List<CellModel> Values {
 		get {
+			List<CellModel> values = new();
 			for (int i = 0; i < this.RowCount; i++) {
-				yield return new List<CellModel>(Enumerable.Range(0, this.ColumnCount).Select(x => this._Values[x, this.ColumnCount]).ToList());
+				for (int j = 0; j < this.ColumnCount; j++) {
+					values.Add(this._Values[i, j]);
+				}
 			}
+			return values;
 		}
 	}
 	#endregion
@@ -54,31 +58,15 @@ public class CellViewModel : INotifyPropertyChanged {
 		}
 	}
 	/// <summary>
-	/// Creates a default view model for a 100x100 matrix
+	/// Creates a default view model for a 10x10 matrix
 	/// </summary>
 	public CellViewModel() {
-		this._Values = new CellModel[100, 100];
+		this._Values = new CellModel[this.RowCount = 10, this.ColumnCount = 10];
 		Random random = new();
-		for (int row = 0; row < 100; row++) {
-			for (int column = 0; column < 100; column++) {
-				this._Values[row, column] = new(random.Next(1, 200));
+		for (int row = 0; row < 10; row++) {
+			for (int column = 0; column < 10; column++) {
+				this._Values[row, column] = new(random.Next(1, 20));
 			}
-		}
-	}
-	#endregion
-	#region Indexers
-	/// <summary>
-	/// Gets a cell from the matrix
-	/// </summary>
-	/// <param name="row">Row index</param>
-	/// <param name="column">Column index</param>
-	/// <returns>Cell</returns>
-	[IndexerName("Cell")]
-	public CellModel this[int row, int column] {
-		get => this._Values[row, column];
-		set {
-			this._Values[row, column] = value;
-			this.OnPropertyChanged($"Cell[{row}, {column}]");
 		}
 	}
 	#endregion
