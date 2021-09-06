@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Documents;
+﻿using System.Windows;
 
-using ThreadSum.Models;
 using ThreadSum.ViewModels;
 
 namespace ThreadSum.Views;
@@ -21,16 +18,17 @@ public partial class MainWindow : Window {
 	/// </summary>
 	public void Summation_Click(object sender, RoutedEventArgs e) {
 		SummationViewModel? summationViewModel = (SummationViewModel) this.TotalsGrid.DataContext;
+		CellViewModel cellViewModel = (CellViewModel) this.ValuesGrid.DataContext;
 		if (!summationViewModel.IsDone) {
-			var values = ( (CellViewModel) this.ValuesGrid.DataContext ).Values;
 			int total = 0;
 			for (int i = 0; i < 10; i++) {
 				for (int j = 0; j < 10; j++) {
-					summationViewModel[i] += values[i * 10 + j].Value;
+					summationViewModel[i] += cellViewModel[i, j];
 				}
 				total += summationViewModel[i];
 			}
 			summationViewModel[10] = total;
+			summationViewModel.IsDone = true;
 		}
 	}
 }

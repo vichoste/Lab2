@@ -24,7 +24,7 @@ public class SummationViewModel : INotifyPropertyChanged {
 	/// It would be stupid if we have to sum everything again
 	/// </summary>
 	public bool IsDone {
-		get; private set;
+		get; set;
 	}
 	#endregion
 	#region Constructors
@@ -56,7 +56,7 @@ public class SummationViewModel : INotifyPropertyChanged {
 		get => this._RowTotals[row].Value;
 		set {
 			this._RowTotals[row].Value = value;
-			this.IsDone = true;
+			this._RowTotals[row].IsUsed = true;
 			this.OnPropertyChanged("RowTotals");
 		}
 	}

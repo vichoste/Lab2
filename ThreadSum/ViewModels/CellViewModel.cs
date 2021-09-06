@@ -54,6 +54,25 @@ public class CellViewModel : INotifyPropertyChanged {
 		}
 	}
 	#endregion
+	#region Indexers
+	/// <summary>
+	/// Gets or sets a value inside the cell-
+	/// </summary>
+	/// <param name="row">Row index</param>
+	/// <param name="column">Column index</param>
+	/// <returns>Value at the position</returns>
+	public int this[int row, int column] {
+		get {
+			this._Values[row, column].IsUsed = true;
+			this.OnPropertyChanged("Values");
+			return this._Values[row, column].Value;
+		}
+		set {
+			this._Values[row, column].Value = value;
+			this.OnPropertyChanged("Values");
+		}
+	}
+	#endregion
 	#region Events
 	public event PropertyChangedEventHandler? PropertyChanged;
 	public void OnPropertyChanged(string value) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(value));

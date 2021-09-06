@@ -29,6 +29,11 @@
 						<Setter Property="FontWeight" Value="Bold"/>
 						<Setter Property="Text" Value="{Binding Value}"/>
 						<Setter Property="Background" Value="CornflowerBlue"/>
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding IsUsed}" Value="True">
+								<Setter Property="Background" Value="Green"/>
+							</DataTrigger>
+						</Style.Triggers>
 					</Style>
 				</ItemsControl.Resources>
 				<ItemsControl.ItemsPanel>
@@ -57,6 +62,11 @@
 						<Setter Property="FontWeight" Value="Bold"/>
 						<Setter Property="Text" Value="{Binding Value}"/>
 						<Setter Property="Background" Value="Gray"/>
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding IsUsed}" Value="True">
+								<Setter Property="Background" Value="Yellow"/>
+							</DataTrigger>
+						</Style.Triggers>
 					</Style>
 				</ItemsControl.Resources>
 				<ItemsControl.ItemsPanel>
