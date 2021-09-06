@@ -19,19 +19,26 @@ public partial class MainWindow : Window {
 	/// <summary>
 	/// Do the summation
 	/// </summary>
-	public void Summation_Click(object sender, RoutedEventArgs e) {
+	public async void Summation_Click(object sender, RoutedEventArgs e) {
 		SummationViewModel? summationViewModel = (SummationViewModel) this.TotalsGrid.DataContext;
 		CellViewModel cellViewModel = (CellViewModel) this.ValuesGrid.DataContext;
 		if (!summationViewModel.IsDone) {
 			int total = 0;
-			_ = Parallel.For(0, 10, i => {
-				for (int j = 0; j < 10; j++) {
-					summationViewModel[i] += cellViewModel[i, j];
-				}
-				total += summationViewModel[i];
-			});
-			summationViewModel[10] = total;
-			summationViewModel.IsDone = true;
+			for (int row = 0; row < 10; row++) {
+				await Task.Run(() => SumRowValues(row, summationViewModel, cellViewModel));
+				total += summationViewModel[row];
+			}
+			Total(summationViewModel, total);
 		}
+	}
+	private static async void SumRowValues(int row, SummationViewModel summationViewModel, CellViewModel cellViewModel) {
+		for (int column = 0; column < 10; column++) {
+			_ = await Task.Run(() => summationViewModel[row] += cellViewModel[row, column]);
+			await Task.Delay(TimeSpan.FromMilliseconds(250));
+		}
+	}
+	private static void Total(SummationViewModel summationViewModel, int total) {
+		summationViewModel[10] = total;
+		summationViewModel.IsDone = true;
 	}
 }
