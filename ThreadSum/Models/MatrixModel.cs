@@ -2,19 +2,11 @@
 using System.Runtime.CompilerServices;
 
 namespace ThreadSum.Models;
-internal class MatrixModel : INotifyPropertyChanged {
+internal class MatrixModel {
 	private readonly int[,] _Array;
 	public MatrixModel(int size) => this._Array = new int[size, size];
-	[IndexerName("Position")]
 	public int this[int row, int column] {
 		get => this._Array[row, column];
-		set {
-			this._Array[row, column] = value;
-			this.OnPropertyChanged($"Position[{row}, {column}]");
-		}
+		set => this._Array[row, column] = value;
 	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	public void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }
