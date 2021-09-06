@@ -1,11 +1,12 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 using ThreadSum.ViewModels;
 
 namespace ThreadSum.Views;
-
 public partial class MainWindow : Window {
 	public MainWindow() => this.InitializeComponent();
 	/// <summary>
@@ -26,7 +27,6 @@ public partial class MainWindow : Window {
 			_ = Parallel.For(0, 10, i => {
 				for (int j = 0; j < 10; j++) {
 					summationViewModel[i] += cellViewModel[i, j];
-					Thread.Sleep(250);
 				}
 				total += summationViewModel[i];
 			});
