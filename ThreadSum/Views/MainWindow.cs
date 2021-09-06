@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Threading;
 
 using ThreadSum.ViewModels;
 
@@ -23,23 +19,27 @@ public partial class MainWindow : Window {
 	/// </summary>
 	public async void Summation_Click(object sender, RoutedEventArgs e) {
 		SummationViewModel? summationViewModel = (SummationViewModel) this.TotalsGrid.DataContext;
-		CellViewModel cellViewModel = (CellViewModel) this.ValuesGrid.DataContext;
 		if (!summationViewModel.IsDone) {
-			int total = 0;
 			List<Task>? rowResults = new();
 			for (int row = 0; row < 10; row++) {
-				rowResults.Add(SumRowValues(row, summationViewModel, cellViewModel));
+				rowResults.Add(this.SumRowValues(row));
 			}
 			await Task.WhenAll(rowResults);
-			summationViewModel[10] = total;
 			summationViewModel.IsDone = true;
 		}
 	}
-	private static async Task<int> SumRowValues(int row, SummationViewModel summationViewModel, CellViewModel cellViewModel) {
+	/// <summary>
+	/// Sums the row values
+	/// </summary>
+	/// <param name="row">Row</param>
+	/// <returns>Async task result</returns>
+	private async Task SumRowValues(int row) {
+		SummationViewModel? summationViewModel = (SummationViewModel) this.TotalsGrid.DataContext;
+		CellViewModel cellViewModel = (CellViewModel) this.ValuesGrid.DataContext;
 		for (int column = 0; column < 10; column++) {
 			summationViewModel[row] += cellViewModel[row, column];
-			await Task.Delay(1000);
+			summationViewModel[10] += cellViewModel[row, column];
+			await Task.Delay(250);
 		}
-		return summationViewModel[row];
 	}
 }
