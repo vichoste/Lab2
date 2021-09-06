@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 using ThreadRace.Models;
 
@@ -53,6 +54,12 @@ public class RacerViewModel : INotifyPropertyChanged {
 	public int ColumnCount {
 		get; private set;
 	}
+	/// <summary>
+	/// It would be stupid if we have to race everything again
+	/// </summary>
+	public bool IsDone {
+		get; set;
+	}
 	#endregion
 	#region Constructors
 	/// <summary>
@@ -85,29 +92,30 @@ public class RacerViewModel : INotifyPropertyChanged {
 		}
 	}
 	#endregion
-	#region Methods
+	#region Indexers
 	/// <summary>
-	/// Moves a racer
+	/// Gets or sets a value inside the cell
 	/// </summary>
-	/// <param name="row">Track</param>
-	/// <param name="column">Racer position</param>
-	public void MoveRacer(int row, int column) {
-		RacerModel? currentRacer;
-		if (this._RaceTrack[row, column] is RacerModel racerModel) {
-			currentRacer = racerModel;
-			if (currentRacer.HasBaton) {
-				Random random = new();
-				int nextStep = random.Next(1, 2);
-				if (currentRacer.Position is >= 0 and < 30) {
-					currentRacer.Position = currentRacer.Position + nextStep < 30 ? currentRacer.Position + nextStep : currentRacer.Position + 1;
-				}
-				this._RaceTrack[row, column] = null;
-				this._RaceTrack[row, currentRacer.Position] = currentRacer;
-				currentRacer.HasBaton = currentRacer.Position is not 30 and not 60 and not 90;
+	/// <param name="row">Row index</param>
+	/// <param name="column">Column index</param>
+	/// <returns>Value at the position</returns>
+	public RacerModel this[int row, int column] {
+		get {
+			if (row == 0) {
+				this.OnPropertyChanged("FirstRaceTrack");
+			} else {
+				this.OnPropertyChanged("SecondRaceTrack");
+			}
+			return this._RaceTrack[row, column];
+		}
+		set {
+			this._RaceTrack[row, column] = value;
+			if (row == 0) {
+				this.OnPropertyChanged("FirstRaceTrack");
+			} else {
+				this.OnPropertyChanged("SecondRaceTrack");
 			}
 		}
-		this.OnPropertyChanged("FirstRaceTrack");
-		this.OnPropertyChanged("SecondRaceTrack");
 	}
 	#endregion
 	#region Events

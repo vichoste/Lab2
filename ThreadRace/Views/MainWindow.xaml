@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:ViewModels="clr-namespace:ThreadRace.ViewModels"
         mc:Ignorable="d"
-        Title="Carrera con hilos" Height="180" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Carrera con hilos" Height="200" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 	<StackPanel Margin="16">
-		<Button x:Name="Reset" Margin="0, 0, 0, 16" TabIndex="0">Reset</Button>
-		<Button x:Name="Summation" Margin="0, 0, 0, 16" TabIndex="1">En sus marcas, ¿listos?, ¡fuera!</Button>
-		<ItemsControl Margin="0, 0, 0, 16" ItemsSource="{Binding FirstRaceTrack}" HorizontalAlignment="Center">
+		<Button x:Name="Reset" Margin="0, 0, 0, 16" TabIndex="0" Click="Reset_Click">Reset</Button>
+		<Button x:Name="Go" Margin="0, 0, 0, 16" TabIndex="1" Click="Go_Click">En sus marcas, ¿listos?, ¡fuera!</Button>
+		<ItemsControl x:Name="FirstRaceTrack" Margin="0, 0, 0, 16" ItemsSource="{Binding FirstRaceTrack}" HorizontalAlignment="Center">
 			<ItemsControl.DataContext>
 				<ViewModels:RacerViewModel></ViewModels:RacerViewModel>
 			</ItemsControl.DataContext>
@@ -52,7 +52,7 @@
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
-		<ItemsControl ItemsSource="{Binding SecondRaceTrack}" HorizontalAlignment="Center">
+		<ItemsControl x:Name="SecondRaceTrack" ItemsSource="{Binding SecondRaceTrack}" HorizontalAlignment="Center">
 			<ItemsControl.DataContext>
 				<ViewModels:RacerViewModel></ViewModels:RacerViewModel>
 			</ItemsControl.DataContext>
@@ -60,7 +60,6 @@
 				<Style x:Key="CellStyle" TargetType="TextBlock">
 					<Setter Property="Width" Value="12"/>
 					<Setter Property="Height" Value="12"/>
-					<Setter Property="Padding" Value="12"/>
 					<Setter Property="Background" Value="Gray"/>
 					<Style.Triggers>
 						<MultiDataTrigger>
