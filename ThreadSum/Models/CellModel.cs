@@ -8,12 +8,12 @@ public class CellModel {
 	/// Value of the cell
 	/// </summary>
 	public int Value {
-		get; private set;
+		get; set;
 	}
 	/// <summary>
-	/// If this cell is added to the sum total
+	/// If this cell is active
 	/// </summary>
-	public bool WasAdded {
+	public bool Active {
 		get; set;
 	}
 	#endregion

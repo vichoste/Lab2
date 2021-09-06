@@ -5,44 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:ViewModels="clr-namespace:ThreadSum.ViewModels"
         mc:Ignorable="d"
-        Title="Sum with Threads" Height="700" Width="640" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-	<Window.DataContext>
-		<ViewModels:CellViewModel></ViewModels:CellViewModel>
-	</Window.DataContext>
+        Title="Sum with Threads" Height="800" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 	<DockPanel Margin="16" LastChildFill="True" HorizontalAlignment="Center" VerticalAlignment="Center">
 		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0" Click="Generate_Click">Generar</Button>
-		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0">Sumar</Button>
-		<ItemsControl ItemsSource="{Binding Values}" HorizontalAlignment="Center">
-			<ItemsControl.Resources>
-				<Style x:Key="GameGridCellStyle" TargetType="TextBlock">
-					<Setter Property="Width" Value="48"/>
-					<Setter Property="Height" Value="48"/>
-					<Setter Property="TextAlignment" Value="Center"/>
-					<Setter Property="FontSize" Value="16"/>
-					<Setter Property="Margin" Value="4"/>
-					<Setter Property="Padding" Value="12"/>
-					<Setter Property="FontWeight" Value="Bold"/>
-					<Setter Property="Text" Value="{Binding Value}"/>
-					<Setter Property="Background" Value="CornflowerBlue"/>
-					<Style.Triggers>
-						<Trigger Property="Text" Value="0">
-							<Setter Property="Background" Value="#082032"/>
-							<Setter Property="Foreground" Value="Transparent"/>
-							<Setter Property="IsHitTestVisible" Value="False"/>
-						</Trigger>
-					</Style.Triggers>
-				</Style>
-			</ItemsControl.Resources>
-			<ItemsControl.ItemsPanel>
-				<ItemsPanelTemplate>
-					<WrapPanel Orientation="Horizontal"/>
-				</ItemsPanelTemplate>
-			</ItemsControl.ItemsPanel>
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Style="{StaticResource GameGridCellStyle}"/>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0" Click="Summation_Click">Sumar</Button>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="10*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<ItemsControl Grid.Column="0" x:Name="ValuesGrid" ItemsSource="{Binding Values}" HorizontalAlignment="Center" VerticalAlignment="Top">
+				<ItemsControl.DataContext>
+					<ViewModels:CellViewModel></ViewModels:CellViewModel>
+				</ItemsControl.DataContext>
+				<ItemsControl.Resources>
+					<Style x:Key="CellStyle" TargetType="TextBlock">
+						<Setter Property="Width" Value="48"/>
+						<Setter Property="Height" Value="48"/>
+						<Setter Property="TextAlignment" Value="Center"/>
+						<Setter Property="FontSize" Value="16"/>
+						<Setter Property="Margin" Value="4"/>
+						<Setter Property="Padding" Value="12"/>
+						<Setter Property="FontWeight" Value="Bold"/>
+						<Setter Property="Text" Value="{Binding Value}"/>
+						<Setter Property="Background" Value="CornflowerBlue"/>
+					</Style>
+				</ItemsControl.Resources>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel Orientation="Horizontal" Height="560" Width="560"/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Style="{StaticResource CellStyle}"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+			<ItemsControl x:Name="TotalsGrid" Grid.Column="1" ItemsSource="{Binding RowTotals}" HorizontalAlignment="Center">
+				<ItemsControl.DataContext>
+					<ViewModels:SummationViewModel></ViewModels:SummationViewModel>
+				</ItemsControl.DataContext>
+				<ItemsControl.Resources>
+					<Style x:Key="CellStyle" TargetType="TextBlock">
+						<Setter Property="Width" Value="48"/>
+						<Setter Property="Height" Value="48"/>
+						<Setter Property="TextAlignment" Value="Center"/>
+						<Setter Property="FontSize" Value="16"/>
+						<Setter Property="Margin" Value="4"/>
+						<Setter Property="Padding" Value="12"/>
+						<Setter Property="FontWeight" Value="Bold"/>
+						<Setter Property="Text" Value="{Binding Value}"/>
+						<Setter Property="Background" Value="Gray"/>
+					</Style>
+				</ItemsControl.Resources>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel Orientation="Vertical" Height="616" Width="56"/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Style="{StaticResource CellStyle}"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</Grid>
 	</DockPanel>
 </Window>
