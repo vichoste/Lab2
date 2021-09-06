@@ -1,10 +1,12 @@
-﻿namespace ThreadSum.Views;
+﻿using System.Windows;
+
+namespace ThreadSum.Views;
 /// <summary>
 /// The window itself
 /// </summary>
-public partial class Window : System.Windows.Window {
+public partial class MainWindow : Window {
 	/// <summary>
 	/// Creates the window
 	/// </summary>
-	public Window() => this.InitializeComponent();
+	public MainWindow() => this.InitializeComponent();
 }

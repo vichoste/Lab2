@@ -1,41 +1,27 @@
-﻿<Window x:Class="ThreadSum.Views.Window"
+﻿<Window x:Class="ThreadSum.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:ViewModels="clr-namespace:ThreadSum.ViewModels"
         mc:Ignorable="d"
-        Title="Sum with Threads" Height="590" Width="590" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Sum with Threads" Height="700" Width="640" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 	<Window.DataContext>
 		<ViewModels:CellViewModel></ViewModels:CellViewModel>
 	</Window.DataContext>
 	<DockPanel Margin="16" LastChildFill="True" HorizontalAlignment="Center" VerticalAlignment="Center">
-		<Grid Margin="0, 0, 0, 16" DockPanel.Dock="Top">
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="1*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Grid.Row="0" Grid.Column="0">Cantidad de filas:</TextBlock>
-			<TextBox Grid.Row="0" Grid.Column="1"/>
-			<TextBlock Grid.Row="1" Grid.Column="0">Cantidad de columnas:</TextBlock>
-			<TextBox Grid.Row="1" Grid.Column="1"/>
-		</Grid>
 		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0">Generar</Button>
+		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0">Sumar</Button>
 		<ItemsControl ItemsSource="{Binding Values}" HorizontalAlignment="Center">
 			<ItemsControl.Resources>
 				<Style x:Key="GameGridCellStyle" TargetType="TextBlock">
 					<Setter Property="Width" Value="48"/>
 					<Setter Property="Height" Value="48"/>
 					<Setter Property="TextAlignment" Value="Center"/>
-					<Setter Property="FontSize" Value="6"/>
+					<Setter Property="FontSize" Value="16"/>
 					<Setter Property="Margin" Value="4"/>
-					<Setter Property="Padding" Value="8"/>
+					<Setter Property="Padding" Value="12"/>
 					<Setter Property="FontWeight" Value="Bold"/>
-					<Setter Property="Cursor" Value="Hand"/>
 					<Setter Property="Text" Value="{Binding Value}"/>
 					<Setter Property="Background" Value="CornflowerBlue"/>
 					<Style.Triggers>
