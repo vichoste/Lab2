@@ -33,7 +33,9 @@ public class RacerViewModel : INotifyPropertyChanged {
 		this._RaceTrack = new RacerModel[this.RowCount = 2, this.ColumnCount = 100];
 		for (int row = 0; row < this.RowCount; row++) {
 			for (int column = 0; row < this.ColumnCount; column += 30) {
-				this._RaceTrack[row, column] = new RacerModel(column);
+				this._RaceTrack[row, column] = new RacerModel(column) {
+					HasBaton = column == 0
+				};
 			}
 		}
 	}
@@ -51,11 +53,12 @@ public class RacerViewModel : INotifyPropertyChanged {
 			if (currentRacer.HasBaton) {
 				Random random = new();
 				int nextStep = random.Next(1, 2);
-				if (currentRacer.Position >= 0 && currentRacer.Position < 30) {
+				if (currentRacer.Position is >= 0 and < 30) {
 					currentRacer.Position = currentRacer.Position + nextStep < 30 ? currentRacer.Position + nextStep : currentRacer.Position + 1;
 				}
 				this._RaceTrack[row, column] = null;
 				this._RaceTrack[row, currentRacer.Position] = currentRacer;
+				currentRacer.HasBaton = currentRacer.Position is not 30 and not 60 and not 90;
 			}
 		}
 	}
