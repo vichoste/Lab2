@@ -16,6 +16,12 @@ public class RacerModel {
 	public bool HasBaton {
 		get; set;
 	}
+	/// <summary>
+	/// Check if this is actually a racer
+	/// </summary>
+	public bool IsARacer {
+		get; set;
+	}
 	#endregion
 	#region Constructors
 	/// <summary>

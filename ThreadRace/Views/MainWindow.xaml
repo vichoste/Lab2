@@ -3,10 +3,97 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		
+		xmlns:ViewModels="clr-namespace:ThreadRace.ViewModels"
         mc:Ignorable="d"
-        Title="Carrera con hilos" Height="800" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <DockPanel LastChildFill="True">
-
-    </DockPanel>
+        Title="Carrera con hilos" Height="180" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+	<StackPanel Margin="16">
+		<Button x:Name="Reset" Margin="0, 0, 0, 16" TabIndex="0">Reset</Button>
+		<Button x:Name="Summation" Margin="0, 0, 0, 16" TabIndex="1">En sus marcas, ¿listos?, ¡fuera!</Button>
+		<ItemsControl Margin="0, 0, 0, 16" ItemsSource="{Binding FirstRaceTrack}" HorizontalAlignment="Center">
+			<ItemsControl.DataContext>
+				<ViewModels:RacerViewModel></ViewModels:RacerViewModel>
+			</ItemsControl.DataContext>
+			<ItemsControl.Resources>
+				<Style x:Key="CellStyle" TargetType="TextBlock">
+					<Setter Property="Width" Value="12"/>
+					<Setter Property="Height" Value="12"/>
+					<Setter Property="TextAlignment" Value="Center"/>
+					<Setter Property="Background" Value="Gray"/>
+					<Style.Triggers>
+						<MultiDataTrigger>
+							<MultiDataTrigger.Conditions>
+								<Condition Binding="{Binding IsARacer}" Value="True"/>
+								<Condition Binding="{Binding HasBaton}" Value="True"/>
+							</MultiDataTrigger.Conditions>
+							<MultiDataTrigger.Setters>
+								<Setter Property="Background" Value="Blue"/>
+							</MultiDataTrigger.Setters>
+						</MultiDataTrigger>
+						<MultiDataTrigger>
+							<MultiDataTrigger.Conditions>
+								<Condition Binding="{Binding IsARacer}" Value="True"/>
+								<Condition Binding="{Binding HasBaton}" Value="false"/>
+							</MultiDataTrigger.Conditions>
+							<MultiDataTrigger.Setters>
+								<Setter Property="Background" Value="Yellow"/>
+							</MultiDataTrigger.Setters>
+						</MultiDataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ItemsControl.Resources>
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Style="{StaticResource CellStyle}"/>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+		<ItemsControl ItemsSource="{Binding SecondRaceTrack}" HorizontalAlignment="Center">
+			<ItemsControl.DataContext>
+				<ViewModels:RacerViewModel></ViewModels:RacerViewModel>
+			</ItemsControl.DataContext>
+			<ItemsControl.Resources>
+				<Style x:Key="CellStyle" TargetType="TextBlock">
+					<Setter Property="Width" Value="12"/>
+					<Setter Property="Height" Value="12"/>
+					<Setter Property="Padding" Value="12"/>
+					<Setter Property="Background" Value="Gray"/>
+					<Style.Triggers>
+						<MultiDataTrigger>
+							<MultiDataTrigger.Conditions>
+								<Condition Binding="{Binding IsARacer}" Value="True"/>
+								<Condition Binding="{Binding HasBaton}" Value="True"/>
+							</MultiDataTrigger.Conditions>
+							<MultiDataTrigger.Setters>
+								<Setter Property="Background" Value="Blue"/>
+							</MultiDataTrigger.Setters>
+						</MultiDataTrigger>
+						<MultiDataTrigger>
+							<MultiDataTrigger.Conditions>
+								<Condition Binding="{Binding IsARacer}" Value="True"/>
+								<Condition Binding="{Binding HasBaton}" Value="false"/>
+							</MultiDataTrigger.Conditions>
+							<MultiDataTrigger.Setters>
+								<Setter Property="Background" Value="Yellow"/>
+							</MultiDataTrigger.Setters>
+						</MultiDataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ItemsControl.Resources>
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Style="{StaticResource CellStyle}"/>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</StackPanel>
 </Window>

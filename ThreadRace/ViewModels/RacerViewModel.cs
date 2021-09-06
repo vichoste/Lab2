@@ -61,10 +61,26 @@ public class RacerViewModel : INotifyPropertyChanged {
 	public RacerViewModel() {
 		this._RaceTrack = new RacerModel[this.RowCount = 2, this.ColumnCount = 100];
 		for (int row = 0; row < this.RowCount; row++) {
-			for (int column = 0; row < this.ColumnCount; column += 30) {
-				this._RaceTrack[row, column] = new RacerModel(column) {
-					HasBaton = column == 0
-				};
+			for (int column = 0; column < this.ColumnCount; column++) {
+				if (column is 0 or 30 or 60) {
+					this._RaceTrack[row, 0] = new RacerModel(0) {
+						HasBaton = true,
+						IsARacer = true
+					};
+					this._RaceTrack[row, 30] = new RacerModel(30) {
+						HasBaton = false,
+						IsARacer = true
+					};
+					this._RaceTrack[row, 60] = new RacerModel(60) {
+						HasBaton = false,
+						IsARacer = true
+					};
+				} else {
+					this._RaceTrack[row, column] = new RacerModel(column) {
+						HasBaton = false,
+						IsARacer = false
+					};
+				}
 			}
 		}
 	}
