@@ -2,7 +2,7 @@
 /// <summary>
 /// This is one cell which is part of the matrix
 /// </summary>
-internal class Cell {
+public class Cell {
 	/// <summary>
 	/// Value of the cell
 	/// </summary>

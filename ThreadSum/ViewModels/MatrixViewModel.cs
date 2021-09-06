@@ -5,11 +5,9 @@ using ThreadSum.Models;
 using ThreadSum.Models.Primitives;
 
 namespace ThreadSum.ViewModels;
-internal class MatrixViewModel : INotifyPropertyChanged {
+public class MatrixViewModel : INotifyPropertyChanged {
 	private MatrixModel _MatrixModel;
-	private int _RowCount;
-	private int _ColumnCount;
-	public MatrixViewModel(int rowCount, int columnCount) => this._MatrixModel = new(this._RowCount = rowCount, this._ColumnCount = columnCount);
+	public MatrixViewModel(int rowCount, int columnCount) => this._MatrixModel = new(rowCount, columnCount);
 	[IndexerName("Cell")]
 	public Cell this[int row, int column] {
 		get => this._MatrixModel[row, column];
