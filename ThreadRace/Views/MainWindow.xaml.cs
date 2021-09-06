@@ -57,20 +57,24 @@ public partial class MainWindow : Window {
 		for (int column = 0; column < 100; column++) {
 			if (racerViewModel[row, column] is RacerModel currentRacer) {
 				Random random = new();
-				int nextStep = random.Next(1, 3);
+				int dx = random.Next(1, 2);
+				int nextStep = column + dx > 100 ? 1 : dx;
 				if (column + nextStep < 100) {
-					racerViewModel[row, column] = new(currentRacer.Position + nextStep) {
-						HasBaton = false,
-						IsARacer = false
-					};
-					racerViewModel[row, column + nextStep] = new(currentRacer.Position + nextStep) {
+					racerViewModel[row, currentRacer.Position + nextStep] = new(currentRacer.Position + nextStep) {
 						HasBaton = true,
 						IsARacer = true
 					};
+					for (int i = currentRacer.Position; i >= column; i--) {
+						racerViewModel[row, i] = new(i) {
+							HasBaton = false,
+							IsARacer = false
+						};
+					}
+
 				}
+				await Task.Delay(30);
 			}
 		}
-		await Task.Delay(60);
 	}
 	#endregion
 }

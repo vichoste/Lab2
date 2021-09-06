@@ -99,22 +99,16 @@ public class RacerViewModel : INotifyPropertyChanged {
 	/// <param name="row">Row index</param>
 	/// <param name="column">Column index</param>
 	/// <returns>Value at the position</returns>
-	public RacerModel this[int row, int column] {
+	public RacerModel? this[int row, int column] {
 		get {
-			if (row == 0) {
-				this.OnPropertyChanged("FirstRaceTrack");
-			} else {
-				this.OnPropertyChanged("SecondRaceTrack");
-			}
+			this.OnPropertyChanged("FirstRaceTrack");
+			this.OnPropertyChanged("SecondRaceTrack");
 			return this._RaceTrack[row, column];
 		}
 		set {
 			this._RaceTrack[row, column] = value;
-			if (row == 0) {
-				this.OnPropertyChanged("FirstRaceTrack");
-			} else {
-				this.OnPropertyChanged("SecondRaceTrack");
-			}
+			this.OnPropertyChanged("FirstRaceTrack");
+			this.OnPropertyChanged("SecondRaceTrack");
 		}
 	}
 	#endregion
