@@ -5,19 +5,31 @@ using System.Windows;
 using ThreadSum.ViewModels;
 
 namespace ThreadSum.Views;
+
+/// <summary>
+/// Main window
+/// </summary>
 public partial class MainWindow : Window {
+	#region Constructors
+	/// <summary>
+	/// Creates the main window
+	/// </summary>
 	public MainWindow() => this.InitializeComponent();
+	#endregion
+	#region Event methods
 	/// <summary>
 	/// Generate new data
 	/// </summary>
 	public void Generate_Click(object sender, RoutedEventArgs e) {
 		this.ValuesGrid.DataContext = new CellViewModel();
 		this.TotalsGrid.DataContext = new SummationViewModel();
+		this.Generate.IsEnabled = this.Summation.IsEnabled = true;
 	}
 	/// <summary>
 	/// Do the summation
 	/// </summary>
 	public async void Summation_Click(object sender, RoutedEventArgs e) {
+		this.Generate.IsEnabled = this.Summation.IsEnabled = false;
 		SummationViewModel? summationViewModel = (SummationViewModel) this.TotalsGrid.DataContext;
 		if (!summationViewModel.IsDone) {
 			List<Task>? rowResults = new();
@@ -27,7 +39,10 @@ public partial class MainWindow : Window {
 			await Task.WhenAll(rowResults);
 			summationViewModel.IsDone = true;
 		}
+		this.Generate.IsEnabled = true;
 	}
+	#endregion
+	#region Methods
 	/// <summary>
 	/// Sums the row values
 	/// </summary>
@@ -42,4 +57,5 @@ public partial class MainWindow : Window {
 			await Task.Delay(250);
 		}
 	}
+	#endregion
 }

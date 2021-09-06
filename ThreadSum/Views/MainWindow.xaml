@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Suma con hilos" Height="800" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 	<DockPanel Margin="16" LastChildFill="True" HorizontalAlignment="Center" VerticalAlignment="Center">
-		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0" Click="Generate_Click">Generar</Button>
-		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0" Click="Summation_Click">Sumar</Button>
+		<Button x:Name="Generate" Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0" Click="Generate_Click" TabIndex="0">Generar</Button>
+		<Button x:Name="Summation" Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0" Click="Summation_Click" TabIndex="1">Sumar</Button>
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="10*"/>
