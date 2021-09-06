@@ -11,7 +11,7 @@ public class CellModel {
 		get; set;
 	}
 	/// <summary>
-	/// If this cell is used
+	/// Check if this cell is used
 	/// </summary>
 	public bool IsUsed {
 		get; set;
