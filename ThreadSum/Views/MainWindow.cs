@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Threading;
 
 using ThreadSum.ViewModels;
@@ -24,21 +26,20 @@ public partial class MainWindow : Window {
 		CellViewModel cellViewModel = (CellViewModel) this.ValuesGrid.DataContext;
 		if (!summationViewModel.IsDone) {
 			int total = 0;
+			List<Task>? rowResults = new();
 			for (int row = 0; row < 10; row++) {
-				await Task.Run(() => SumRowValues(row, summationViewModel, cellViewModel));
-				total += summationViewModel[row];
+				rowResults.Add(SumRowValues(row, summationViewModel, cellViewModel));
 			}
-			Total(summationViewModel, total);
+			await Task.WhenAll(rowResults);
+			summationViewModel[10] = total;
+			summationViewModel.IsDone = true;
 		}
 	}
-	private static async void SumRowValues(int row, SummationViewModel summationViewModel, CellViewModel cellViewModel) {
+	private static async Task<int> SumRowValues(int row, SummationViewModel summationViewModel, CellViewModel cellViewModel) {
 		for (int column = 0; column < 10; column++) {
-			_ = await Task.Run(() => summationViewModel[row] += cellViewModel[row, column]);
-			await Task.Delay(TimeSpan.FromMilliseconds(250));
+			summationViewModel[row] += cellViewModel[row, column];
+			await Task.Delay(1000);
 		}
-	}
-	private static void Total(SummationViewModel summationViewModel, int total) {
-		summationViewModel[10] = total;
-		summationViewModel.IsDone = true;
+		return summationViewModel[row];
 	}
 }
