@@ -13,8 +13,4 @@
     <SignAssembly>False</SignAssembly>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

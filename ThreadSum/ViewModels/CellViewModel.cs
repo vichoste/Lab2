@@ -31,9 +31,9 @@ public class CellViewModel : INotifyPropertyChanged {
 	public List<CellModel> Values {
 		get {
 			List<CellModel> values = new();
-			for (int i = 0; i < this.RowCount; i++) {
-				for (int j = 0; j < this.ColumnCount; j++) {
-					values.Add(this._Values[i, j]);
+			for (int row = 0; row < this.RowCount; row++) {
+				for (int column = 0; column < this.ColumnCount; column++) {
+					values.Add(this._Values[row, column]);
 				}
 			}
 			return values;
@@ -56,7 +56,7 @@ public class CellViewModel : INotifyPropertyChanged {
 	#endregion
 	#region Indexers
 	/// <summary>
-	/// Gets or sets a value inside the cell-
+	/// Gets or sets a value inside the cell
 	/// </summary>
 	/// <param name="row">Row index</param>
 	/// <param name="column">Column index</param>
@@ -74,7 +74,14 @@ public class CellViewModel : INotifyPropertyChanged {
 	}
 	#endregion
 	#region Events
+	/// <summary>
+	/// Property changed event handler
+	/// </summary>
 	public event PropertyChangedEventHandler? PropertyChanged;
+	/// <summary>
+	/// When property changes, call this function
+	/// </summary>
+	/// <param name="value">Property name</param>
 	public void OnPropertyChanged(string value) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(value));
 	#endregion
 }

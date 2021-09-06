@@ -62,7 +62,14 @@ public class SummationViewModel : INotifyPropertyChanged {
 	}
 	#endregion
 	#region Events
+	/// <summary>
+	/// Property changed event handler
+	/// </summary>
 	public event PropertyChangedEventHandler? PropertyChanged;
+	/// <summary>
+	/// When property changes, call this function
+	/// </summary>
+	/// <param name="value">Property name</param>
 	public void OnPropertyChanged(string value) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(value));
 	#endregion
 }
