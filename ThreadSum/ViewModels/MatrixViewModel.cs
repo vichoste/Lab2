@@ -2,24 +2,22 @@
 using System.Runtime.CompilerServices;
 
 using ThreadSum.Models;
+using ThreadSum.Models.Primitives;
 
 namespace ThreadSum.ViewModels;
 internal class MatrixViewModel : INotifyPropertyChanged {
 	private MatrixModel _MatrixModel;
-	public MatrixViewModel() => this._MatrixModel = new MatrixModel(100);
-	[IndexerName("Position")]
-	public int this[int row, int column] {
+	private int _RowCount;
+	private int _ColumnCount;
+	public MatrixViewModel(int rowCount, int columnCount) => this._MatrixModel = new(this._RowCount = rowCount, this._ColumnCount = columnCount);
+	[IndexerName("Cell")]
+	public Cell this[int row, int column] {
 		get => this._MatrixModel[row, column];
 		set {
 			this._MatrixModel[row, column] = value;
-			this.OnPropertyChanged($"Position[{row}, {column}]");
+			this.OnPropertyChanged($"Cell[{row}, {column}]");
 		}
 	}
 	public event PropertyChangedEventHandler? PropertyChanged;
-	public void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-	public IList<int> Rows {
-		get {
-
-		}
-	}
+	public void OnPropertyChanged(string value) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(value));
 }
