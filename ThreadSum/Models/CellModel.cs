@@ -1,8 +1,9 @@
-﻿namespace ThreadSum.Models.Primitives;
+﻿namespace ThreadSum.Models;
 /// <summary>
 /// This is one cell which is part of the matrix
 /// </summary>
-public class Cell {
+public class CellModel {
+	#region Properties
 	/// <summary>
 	/// Value of the cell
 	/// </summary>
@@ -15,9 +16,12 @@ public class Cell {
 	public bool WasAdded {
 		get; set;
 	}
+	#endregion
+	#region Constructors
 	/// <summary>
 	/// Creates one cell of a matrix
 	/// </summary>
 	/// <param name="value">Value taken by the cell</param>
-	public Cell(int value) => this.Value = value;
+	public CellModel(int value) => this.Value = value;
+	#endregion
 }

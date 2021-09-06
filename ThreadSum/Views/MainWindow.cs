@@ -1,14 +1,10 @@
-﻿using System.Windows.Controls;
-
-using ThreadSum.ViewModels;
-
-namespace ThreadSum.Views;
+﻿namespace ThreadSum.Views;
+/// <summary>
+/// The window itself
+/// </summary>
 public partial class Window : System.Windows.Window {
-	public Window() {
-		this.InitializeComponent();
-		var matrixViewModel = new MatrixViewModel(100, 100);
-		_ = this.Panel.Children.Add(new TextBlock() {
-			Text = matrixViewModel[0, 3].Value.ToString()
-		});
-	}
+	/// <summary>
+	/// Creates the window
+	/// </summary>
+	public Window() => this.InitializeComponent();
 }
