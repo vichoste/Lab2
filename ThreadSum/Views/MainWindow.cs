@@ -1,12 +1,10 @@
 ﻿using System.Windows;
 
+using ThreadSum.ViewModels;
+
 namespace ThreadSum.Views;
-/// <summary>
-/// The window itself
-/// </summary>
+
 public partial class MainWindow : Window {
-	/// <summary>
-	/// Creates the window
-	/// </summary>
 	public MainWindow() => this.InitializeComponent();
+	public void Generate_Click(object sender, RoutedEventArgs e) => this.DataContext = new CellViewModel();
 }

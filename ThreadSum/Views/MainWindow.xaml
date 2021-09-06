@@ -10,7 +10,7 @@
 		<ViewModels:CellViewModel></ViewModels:CellViewModel>
 	</Window.DataContext>
 	<DockPanel Margin="16" LastChildFill="True" HorizontalAlignment="Center" VerticalAlignment="Center">
-		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0">Generar</Button>
+		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0" Click="Generate_Click">Generar</Button>
 		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0">Sumar</Button>
 		<ItemsControl ItemsSource="{Binding Values}" HorizontalAlignment="Center">
 			<ItemsControl.Resources>
