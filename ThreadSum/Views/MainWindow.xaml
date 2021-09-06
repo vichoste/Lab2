@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:ViewModels="clr-namespace:ThreadSum.ViewModels"
         mc:Ignorable="d"
-        Title="Sum with Threads" Height="480" Width="480" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Sum with Threads" Height="590" Width="590" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 	<Window.DataContext>
 		<ViewModels:CellViewModel></ViewModels:CellViewModel>
 	</Window.DataContext>
-	<DockPanel Margin="16" LastChildFill="True">
+	<DockPanel Margin="16" LastChildFill="True" HorizontalAlignment="Center" VerticalAlignment="Center">
 		<Grid Margin="0, 0, 0, 16" DockPanel.Dock="Top">
 			<Grid.RowDefinitions>
 				<RowDefinition/>
@@ -25,19 +25,19 @@
 			<TextBox Grid.Row="1" Grid.Column="1"/>
 		</Grid>
 		<Button Margin="0, 0, 0, 16" DockPanel.Dock="Top" Grid.Row="0" Grid.Column="0">Generar</Button>
-		<ItemsControl ItemsSource="{Binding Values}">
+		<ItemsControl ItemsSource="{Binding Values}" HorizontalAlignment="Center">
 			<ItemsControl.Resources>
 				<Style x:Key="GameGridCellStyle" TargetType="TextBlock">
-					<Setter Property="MinWidth" Value="10"/>
-					<Setter Property="MinHeight" Value="10"/>
+					<Setter Property="Width" Value="48"/>
+					<Setter Property="Height" Value="48"/>
 					<Setter Property="TextAlignment" Value="Center"/>
-					<Setter Property="FontSize" Value="10"/>
+					<Setter Property="FontSize" Value="6"/>
 					<Setter Property="Margin" Value="4"/>
 					<Setter Property="Padding" Value="8"/>
 					<Setter Property="FontWeight" Value="Bold"/>
 					<Setter Property="Cursor" Value="Hand"/>
 					<Setter Property="Text" Value="{Binding Value}"/>
-					<Setter Property="Background" Value="White"/>
+					<Setter Property="Background" Value="CornflowerBlue"/>
 					<Style.Triggers>
 						<Trigger Property="Text" Value="0">
 							<Setter Property="Background" Value="#082032"/>
@@ -49,7 +49,7 @@
 			</ItemsControl.Resources>
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-					<WrapPanel/>
+					<WrapPanel Orientation="Horizontal"/>
 				</ItemsPanelTemplate>
 			</ItemsControl.ItemsPanel>
 			<ItemsControl.ItemTemplate>

@@ -44,20 +44,6 @@ public class CellViewModel : INotifyPropertyChanged {
 	#endregion
 	#region Constructors
 	/// <summary>
-	/// Creates a matrix
-	/// </summary>
-	/// <param name="rowCount">Row size</param>
-	/// <param name="columnCount">Column size</param>
-	public CellViewModel(int rowCount, int columnCount) {
-		this._Values = new CellModel[this.RowCount = rowCount, this.ColumnCount = columnCount];
-		Random random = new();
-		for (int row = 0; row < rowCount; row++) {
-			for (int column = 0; column < columnCount; column++) {
-				this._Values[row, column] = new(random.Next(1, rowCount + columnCount));
-			}
-		}
-	}
-	/// <summary>
 	/// Creates a default view model for a 10x10 matrix
 	/// </summary>
 	public CellViewModel() {
