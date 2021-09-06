@@ -60,17 +60,23 @@ public partial class MainWindow : Window {
 				int dx = random.Next(1, 2);
 				int nextStep = column + dx > 100 ? 1 : dx;
 				if (column + nextStep < 100) {
-					racerViewModel[row, currentRacer.Position + nextStep] = new(currentRacer.Position + nextStep) {
-						HasBaton = true,
-						IsARacer = true
-					};
-					for (int i = currentRacer.Position; i >= column; i--) {
-						racerViewModel[row, i] = new(i) {
+					if (column is not 30 and not 60 and not 90) {
+						racerViewModel[row, column + nextStep] = new() {
+							HasBaton = true,
+							IsARacer = true
+						};
+						for (int i = column + nextStep - 1; i >= column; i--) {
+							racerViewModel[row, i] = new() {
+								HasBaton = false,
+								IsARacer = false
+							};
+						}
+					} else {
+						racerViewModel[row, column] = new() {
 							HasBaton = false,
-							IsARacer = false
+							IsARacer = true
 						};
 					}
-
 				}
 				await Task.Delay(30);
 			}

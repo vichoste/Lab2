@@ -5,12 +5,6 @@
 public class RacerModel {
 	#region Properties
 	/// <summary>
-	/// Current position of the racer in the race track
-	/// </summary>
-	public int Position {
-		get; set;
-	}
-	/// <summary>
 	/// Checks if this racer has the baton
 	/// </summary>
 	public bool HasBaton {
@@ -27,6 +21,7 @@ public class RacerModel {
 	/// <summary>
 	/// Creates a racer
 	/// </summary>
-	public RacerModel(int position) => this.Position = position;
+	public RacerModel() {
+	}
 	#endregion
 }
