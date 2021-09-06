@@ -34,26 +34,23 @@ public partial class MainWindow : Window {
 	/// </summary>
 	public async void Go_Click(object sender, RoutedEventArgs e) {
 		this.Reset.IsEnabled = this.Go.IsEnabled = false;
-		RacerViewModel? racerViewModel = (RacerViewModel) this.FirstRaceTrack.DataContext;
-		if (!racerViewModel.IsDone) {
+		if (this.FirstRaceTrack.DataContext is RacerViewModel firstTrack && this.SecondRaceTrack.DataContext is RacerViewModel secondTrack) {
 			List<Task>? rowResults = new();
-			for (int row = 0; row < 2; row++) {
-				rowResults.Add(this.GoRaceTrack(row));
-			}
+			rowResults.Add(this.GoRaceTrack(firstTrack, 0));
+			rowResults.Add(this.GoRaceTrack(secondTrack, 1));
 			await Task.WhenAll(rowResults);
-			racerViewModel.IsDone = true;
+			this.Reset.IsEnabled = true;
 		}
-		this.Reset.IsEnabled = true;
 	}
 	#endregion
 	#region Methods
 	/// <summary>
-	/// Sums the row values
+	/// Starts the race
 	/// </summary>
-	/// <param name="row">Row</param>
-	/// <returns>Async task result</returns>
-	private async Task GoRaceTrack(int row) {
-		RacerViewModel? racerViewModel = (RacerViewModel) this.FirstRaceTrack.DataContext;
+	/// <param name="racerViewModel">Race view model</param>
+	/// <param name="row">Race track</param>
+	/// <returns>Race track async task</returns>
+	private async Task GoRaceTrack(RacerViewModel racerViewModel, int row) {
 		for (int column = 0; column < 100; column++) {
 			if (racerViewModel[row, column] is RacerModel currentRacer) {
 				Random random = new();

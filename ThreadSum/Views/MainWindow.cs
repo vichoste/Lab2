@@ -31,14 +31,11 @@ public partial class MainWindow : Window {
 	public async void Summation_Click(object sender, RoutedEventArgs e) {
 		this.Generate.IsEnabled = this.Summation.IsEnabled = false;
 		SummationViewModel? summationViewModel = (SummationViewModel) this.TotalsGrid.DataContext;
-		if (!summationViewModel.IsDone) {
-			List<Task>? rowResults = new();
-			for (int row = 0; row < 10; row++) {
-				rowResults.Add(this.SumRowValues(row));
-			}
-			await Task.WhenAll(rowResults);
-			summationViewModel.IsDone = true;
+		List<Task>? rowResults = new();
+		for (int row = 0; row < 10; row++) {
+			rowResults.Add(this.SumRowValues(row));
 		}
+		await Task.WhenAll(rowResults);
 		this.Generate.IsEnabled = true;
 	}
 	#endregion
@@ -54,7 +51,7 @@ public partial class MainWindow : Window {
 		for (int column = 0; column < 10; column++) {
 			summationViewModel[row] += cellViewModel[row, column];
 			summationViewModel[10] += cellViewModel[row, column];
-			await Task.Delay(250);
+			await Task.Delay(100);
 		}
 	}
 	#endregion

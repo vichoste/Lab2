@@ -54,12 +54,6 @@ public class RacerViewModel : INotifyPropertyChanged {
 	public int ColumnCount {
 		get; private set;
 	}
-	/// <summary>
-	/// It would be stupid if we have to race everything again
-	/// </summary>
-	public bool IsDone {
-		get; set;
-	}
 	#endregion
 	#region Constructors
 	/// <summary>

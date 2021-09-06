@@ -20,12 +20,6 @@ public class SummationViewModel : INotifyPropertyChanged {
 		private set {
 		}
 	}
-	/// <summary>
-	/// It would be stupid if we have to sum everything again
-	/// </summary>
-	public bool IsDone {
-		get; set;
-	}
 	#endregion
 	#region Constructors
 	/// <summary>
