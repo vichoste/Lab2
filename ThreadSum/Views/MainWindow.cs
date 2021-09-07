@@ -30,7 +30,6 @@ public partial class MainWindow : Window {
 	/// </summary>
 	public async void Summation_Click(object sender, RoutedEventArgs e) {
 		this.Generate.IsEnabled = this.Summation.IsEnabled = false;
-		SummationViewModel? summationViewModel = (SummationViewModel) this.TotalsGrid.DataContext;
 		List<Task>? rowResults = new();
 		for (int row = 0; row < 10; row++) {
 			rowResults.Add(this.SumRowValues(row));

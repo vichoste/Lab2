@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 
-using ThreadRace.Models;
 using ThreadRace.ViewModels;
 
 namespace ThreadRace.Views;
@@ -36,8 +35,8 @@ public partial class MainWindow : Window {
 		this.Reset.IsEnabled = this.Go.IsEnabled = false;
 		if (this.FirstRaceTrack.DataContext is RacerViewModel firstTrack && this.SecondRaceTrack.DataContext is RacerViewModel secondTrack) {
 			List<Task>? rowResults = new();
-			rowResults.Add(this.GoRaceTrack(firstTrack, 0));
-			rowResults.Add(this.GoRaceTrack(secondTrack, 1));
+			rowResults.Add(GoRaceTrack(firstTrack, 0));
+			rowResults.Add(GoRaceTrack(secondTrack, 1));
 			await Task.WhenAll(rowResults);
 			this.Reset.IsEnabled = true;
 		}
@@ -50,9 +49,9 @@ public partial class MainWindow : Window {
 	/// <param name="racerViewModel">Race view model</param>
 	/// <param name="row">Race track</param>
 	/// <returns>Race track async task</returns>
-	private async Task GoRaceTrack(RacerViewModel racerViewModel, int row) {
+	private static async Task GoRaceTrack(RacerViewModel racerViewModel, int row) {
 		for (int column = 0; column < 100; column++) {
-			if (racerViewModel[row, column] is RacerModel currentRacer) {
+			if (racerViewModel[row, column] is not null) {
 				Random random = new();
 				int dx = random.Next(1, 2);
 				int nextStep = column + dx > 100 ? 1 : dx;
