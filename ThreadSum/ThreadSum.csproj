@@ -10,6 +10,7 @@
     <StartupObject>ThreadSum.App</StartupObject>
     <DebugType>embedded</DebugType>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <IsPublishable>False</IsPublishable>
   </PropertyGroup>
 
 </Project>

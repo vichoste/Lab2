@@ -11,6 +11,7 @@
     <DebugType>embedded</DebugType>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <SignAssembly>False</SignAssembly>
+    <IsPublishable>False</IsPublishable>
   </PropertyGroup>
 
 </Project>
