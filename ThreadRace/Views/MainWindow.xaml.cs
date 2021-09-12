@@ -50,18 +50,18 @@ public partial class MainWindow : Window {
 	/// <param name="row">Race track</param>
 	/// <returns>Race track async task</returns>
 	private static async Task GoRaceTrack(RacerViewModel racerViewModel, int row) {
-		for (int column = 0; column < 100; column++) {
+		for (var column = 0; column < 100; column++) {
 			if (racerViewModel[row, column] is not null) {
 				Random random = new();
-				int dx = random.Next(1, 2);
-				int nextStep = column + dx > 100 ? 1 : dx;
+				var dx = random.Next(1, 2);
+				var nextStep = column + dx > 100 ? 1 : dx;
 				if (column + nextStep < 100) {
 					if (column is not 30 and not 60 and not 90) {
 						racerViewModel[row, column + nextStep] = new() {
 							HasBaton = true,
 							IsARacer = true
 						};
-						for (int i = column + nextStep - 1; i >= column; i--) {
+						for (var i = column + nextStep - 1; i >= column; i--) {
 							racerViewModel[row, i] = new() {
 								HasBaton = false,
 								IsARacer = false

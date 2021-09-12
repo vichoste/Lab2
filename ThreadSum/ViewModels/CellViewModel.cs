@@ -10,7 +10,7 @@ namespace ThreadSum.ViewModels;
 /// </summary>
 public class CellViewModel : INotifyPropertyChanged {
 	#region Atrributes
-	private CellModel[,] _Values;
+	private readonly CellModel[,] _Values;
 	#endregion
 	#region Properties
 	/// <summary>
@@ -31,8 +31,8 @@ public class CellViewModel : INotifyPropertyChanged {
 	public List<CellModel> Values {
 		get {
 			List<CellModel> values = new();
-			for (int row = 0; row < this.RowCount; row++) {
-				for (int column = 0; column < this.ColumnCount; column++) {
+			for (var row = 0; row < this.RowCount; row++) {
+				for (var column = 0; column < this.ColumnCount; column++) {
 					values.Add(this._Values[row, column]);
 				}
 			}
@@ -47,8 +47,8 @@ public class CellViewModel : INotifyPropertyChanged {
 	public CellViewModel() {
 		this._Values = new CellModel[this.RowCount = 10, this.ColumnCount = 10];
 		Random random = new();
-		for (int row = 0; row < 10; row++) {
-			for (int column = 0; column < 10; column++) {
+		for (var row = 0; row < 10; row++) {
+			for (var column = 0; column < 10; column++) {
 				this._Values[row, column] = new(random.Next(1, 20));
 			}
 		}

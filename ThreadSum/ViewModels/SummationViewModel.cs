@@ -9,7 +9,7 @@ namespace ThreadSum.ViewModels;
 /// </summary>
 public class SummationViewModel : INotifyPropertyChanged {
 	#region Attributes
-	private List<CellModel> _RowTotals;
+	private readonly List<CellModel> _RowTotals;
 	#endregion
 	#region Properties
 	/// <summary>

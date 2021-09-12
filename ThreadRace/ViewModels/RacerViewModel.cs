@@ -9,7 +9,7 @@ namespace ThreadRace.ViewModels;
 /// </summary>
 public class RacerViewModel : INotifyPropertyChanged {
 	#region Attributes
-	private RacerModel?[,] _RaceTrack;
+	private readonly RacerModel?[,] _RaceTrack;
 	#endregion
 	#region Properties
 	/// <summary>
@@ -18,7 +18,7 @@ public class RacerViewModel : INotifyPropertyChanged {
 	public List<RacerModel> FirstRaceTrack {
 		get {
 			List<RacerModel> racers = new();
-			for (int column = 0; column < this.ColumnCount; column++) {
+			for (var column = 0; column < this.ColumnCount; column++) {
 				if (this._RaceTrack[0, column] is RacerModel racerModel) {
 					racers.Add(racerModel);
 				}
@@ -32,7 +32,7 @@ public class RacerViewModel : INotifyPropertyChanged {
 	public List<RacerModel> SecondRaceTrack {
 		get {
 			List<RacerModel> racers = new();
-			for (int column = 0; column < this.ColumnCount; column++) {
+			for (var column = 0; column < this.ColumnCount; column++) {
 				if (this._RaceTrack[1, column] is RacerModel racerModel) {
 					racers.Add(racerModel);
 				}
@@ -59,8 +59,8 @@ public class RacerViewModel : INotifyPropertyChanged {
 	/// </summary>
 	public RacerViewModel() {
 		this._RaceTrack = new RacerModel[this.RowCount = 2, this.ColumnCount = 100];
-		for (int row = 0; row < this.RowCount; row++) {
-			for (int column = 0; column < this.ColumnCount; column++) {
+		for (var row = 0; row < this.RowCount; row++) {
+			for (var column = 0; column < this.ColumnCount; column++) {
 				if (column is 0 or 30 or 60 or 90) {
 					this._RaceTrack[row, 0] = new RacerModel() {
 						HasBaton = true,
